@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['num-required'] = "<div class='text-danger font-weight-bold'>Number of variants not valid</div>";
     }
 
-    if (!empty($_POST['marker'])) {
+    if (!empty($_POST['btn_2'])) {
         $errors_2 = [];
         for ($i = 1; $i <= $_POST['items_num']; $i++) {
             if (empty($_POST['product_' . $i])) {
@@ -82,9 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="numeber" name="items_num" id="items_num" class="form-control" placeholder="" aria-describedby="helpId" value="<?= $_POST['items_num'] ?? '' ?>">
                         <?= $errors['num-required'] ?? '' ?>
                     </div>
-                    <button class="btn btn-sm btn-outline-dark rounded mt-3 mb-5" name="step-1" value="s1">Enter Products</button>
-                    <?php if ((isset($_POST['items_num']) && empty($errors) && empty($_POST['marker']))||(!empty($errors_2))) { ?>
-                        <td> <input type="number" name="marker" value="1" style="display: none;"></input> </td>
+                    <button class="btn btn-sm btn-outline-dark rounded mt-3 mb-5" name="btn_1" value="btn_1">Enter Products</button>
+                    <?php if ((!empty($_POST['btn_1']) && empty($errors) && empty($_POST['btn_2']))||(!empty($errors_2)&&!empty($_POST['btn_2']))) { ?>
                         <table class="table table-bordered">
                             <form method="post">
                                 <caption><button class="btn btn-sm btn-outline-dark rounded mt-3" name="btn_2" value="btn_2">Receipt</button></caption>
@@ -114,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </table>
                     <?php } ?>
                 </form>
-                <?php if (isset($_POST['product_1']) && empty($errors_2) && !empty($_POST['btn_2'])) { ?>
+                <?php if (empty($errors_2) && !empty($_POST['btn_2'])) { ?>
                     <table class="table table-bordered">
                         <form method="post">
                             <thead>
